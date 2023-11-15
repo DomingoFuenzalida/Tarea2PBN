@@ -25,29 +25,29 @@ void gen_personajes(char***& mapa, int filas) {
     for (int i = 0; i < filas; i++) {
         mapa[i] = (char**)malloc(sizeof(char*) * 4);
         for (int j = 0; j < 4; j++) {
-            mapa[i][j] = (char*)malloc(sizeof(char) * 4);
+            mapa[i][j] = (char*)malloc(sizeof(char) * 2);  // Cambiado el tamaño a 2 para el carácter y el terminador nulo
         }
     }
 
-    for (int i = 0; i < filas; i++){
-        for(int j = 0; j < 4 ; j++){
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < 4; j++) {
             int numero_aleatorio = rand() % 100;
-            
-            if (numero_aleatorio < 30){
-                mapa[i][j] = 'S';
+
+            if (numero_aleatorio < 30) {
+                mapa[i][j][0] = 'S';
+            } else if (numero_aleatorio >= 30 && numero_aleatorio < 45) {
+                mapa[i][j][0] = 'A';
+            } else if (numero_aleatorio >= 45 && numero_aleatorio < 65) {
+                mapa[i][j][0] = 'C';
+            } else if (numero_aleatorio >= 65 && numero_aleatorio < 75) {
+                mapa[i][j][0] = 'Z';
+            } else if (numero_aleatorio >= 75 && numero_aleatorio < 100) {
+                mapa[i][j][0] = ' ';
             }
-            else if (numero_aleatorio > 30 && numero_aleatorio < 45) {
-                mapa[i][j] = 'A';
-            }
-            else if (numero_aleatorio > 45 && numero_aleatorio < 65) {
-                mapa[i][j] = 'C';
-            }
-            else if (numero_aleatorio > 65 && numero_aleatorio < 75) {
-                mapa[i][j] = 'Z';
-            }
-            else if (numero_aleatorio > 75 && numero_aleatorio < 100) {
-                mapa[i][j] = ' ';
-            }
+
+            // Agregado el terminador nulo
+            mapa[i][j][1] = '\0';
+
             cout << mapa[i][j];
         }
         cout << "\n";

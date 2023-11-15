@@ -3,8 +3,7 @@ CXXFLAGS = -Wall -Wextra -Wundef -Werror -Wuninitialized -Winit-self
 
 SRCS = main.cpp personaje.cpp
 OBJS = $(SRCS:.cpp=.o)
-TARGET = mi_programa
-
+TARGET = main
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 

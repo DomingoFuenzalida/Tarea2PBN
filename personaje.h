@@ -1,19 +1,25 @@
-using namespace std;
+#ifndef PERSONAJES_H
+#define PERSONAJES_H
 
-class personaje {
-public:
-    char codigo;
-    string tipo;
-    int salud_base;
-    int fuerza_max;
-    int alcance_max;
-    string direccion_ataque;
-    int desplazamiento_max;
-    int curacion;
-    personaje(char codigo,string tipo, int salud_base ,int fuerza_max, int alcance_max, string direccion_ataque, int desplazamiento_max, int curacion);
-    ~personaje();
-    void desplazarse(int objetivo);
-    void actuar(char objetivo, char accion);
+#include <iostream>
+#include <string>
+using namespace std;
+class Personaje {
+    public:
+        string codigo;
+        string nombre;
+        int salud_base;
+        int fuerza_max;
+        int alcance_max;
+        string direccion_ataque;
+        int desplazamiento;
+        int curacion;
+        int posx;
+        int posy;
+
+        void stats_personajes(string, int, int);
 };
+
+#endif
 
 

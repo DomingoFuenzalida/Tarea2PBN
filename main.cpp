@@ -2,7 +2,7 @@
 #include "personaje.h"
 #include <cstdlib>
 using namespace std;
-void gen_personajes(int filas);
+void gen_personajes(char**);
 
 
 
@@ -11,8 +11,12 @@ int main(){
     cout << "ingrese la cantidad de filas (15 ~ 40): ";
     cin >> cantidad_filas;
     char static mapa[cantidad_filas][4];
-    gen_personajes(cantidad_filas);
 
+    mapa = malloc(sizeof(char*) * 4);
+    for (int i = 0 ; i < cantidad_filas; i++){
+        mapa[i] = malloc(sizeof(char*) * 4);
+    }
+    gen_personajes
     for (int i = 0; i < 9; i++) {
 	free(mapa[i]);}
 	free(mapa);
@@ -20,11 +24,7 @@ int main(){
     
 }
 
-void gen_personajes(filas){
-    mapa = malloc(sizeof(char*) * 4);
-    for (int i = 0 ; i < filas; i++){
-        mapa[i] = malloc(sizeof(char*) * 4);
-    }
+void gen_personajes(){
 
 
 }

@@ -16,7 +16,7 @@ int main(){
     for (int i = 0; i < 9; i++) {
 	free(mapa[i]);}
 	free(mapa);
-	return 0;}
+	return 0;
     
 }
 

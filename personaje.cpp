@@ -17,9 +17,10 @@ personaje::personaje(char codigo,string tipo,int salud_base, int fuerza_max, int
 personaje::~personaje(){}
 
 void personaje::desplazarse(int objetivo) {
-    
+    cout << objetivo;
 }
 
 void personaje::actuar(char objetivo, char accion) {
-    
+    cout << objetivo;
+    cout << accion;
 }

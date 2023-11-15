@@ -28,6 +28,30 @@ void gen_personajes(char***& mapa, int filas) {
             mapa[i][j] = (char*)malloc(sizeof(char) * 4);
         }
     }
+
+    for (int i = 0; i < filas; i++){
+        for(int j = 0; j < 4 ; j++){
+            int numero_aleatorio = rand() % 100;
+            
+            if (numero_aleatorio < 30){
+                mapa[i][j] = 'S';
+            }
+            else if (numero_aleatorio > 30 && numero_aleatorio < 45) {
+                mapa[i][j] = 'A';
+            }
+            else if (numero_aleatorio > 45 && numero_aleatorio < 65) {
+                mapa[i][j] = 'C';
+            }
+            else if (numero_aleatorio > 65 && numero_aleatorio < 75) {
+                mapa[i][j] = 'Z';
+            }
+            else if (numero_aleatorio > 75 && numero_aleatorio < 100) {
+                mapa[i][j] = ' ';
+            }
+            cout << mapa[i][j];
+        }
+        cout << "\n";
+    }
 }
 
 void liberar_memoria(char***& mapa, int filas) {

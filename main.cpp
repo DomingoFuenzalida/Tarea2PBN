@@ -337,7 +337,7 @@ void atacar(vector<Personaje>& personajes){
         if (team_atacante == "O" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
             if (direccion.find("H")!= string::npos){
                 for (int j = 0; j <= alcance; j++){
-                    if (personajes[i+j].team == "E" && ataco == false){
+                    if (personajes[i+j].team != team_atacante && personajes[i+j].codigo != " " && ataco == false){
                         personajes[i].actuar(personajes[i+j]);
                         ataco = true;
                         
@@ -346,7 +346,12 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("V")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i+4*j].team == "E"){
+                    long unsigned int ubicacion = i+4*j;
+                    int ubi = i+4*j;
+                    if (ubi < 0 || ubicacion > personajes.size()){
+
+                    }
+                    else if (personajes[i+4*j].team != team_atacante && personajes[i+4*j].codigo != " " ){
                         try{
                             personajes[i].actuar(personajes[i+4*j]);
                             ataco = true;}
@@ -359,7 +364,13 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("D")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i + 4*j + abs(j)].team == "E"){
+                    long unsigned int ubicacion = i + 4*j + abs(j);
+                    int ubi = i + 4*j + abs(j);
+                    if (ubi < 0 || ubicacion > personajes.size()){
+
+                    }
+                    
+                    else if (personajes[ubicacion].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
                         cout<<"llegue"<<endl;
                         try{
                             personajes[i].actuar(personajes[i+4*j+abs(j)]);
@@ -384,7 +395,7 @@ void atacar(vector<Personaje>& personajes){
         if (team_atacante == "E" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
             if (direccion.find("H")!= string::npos){
                 for (int j = 0; j <= alcance; j++){
-                    if (personajes[i-j].team == "O" && ataco == false){
+                    if (personajes[i-j].team != team_atacante && personajes[i+j].codigo != " "  && ataco == false){
                         personajes[i].actuar(personajes[i-j]);
                         ataco = true;
                         
@@ -393,7 +404,12 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("V")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i+4*j].team == "O"){
+                    long unsigned int ubicacion = i+4*j;
+                    int ubi = i+4*j;
+                    if (ubi < 0 || ubicacion > personajes.size()){
+
+                    }
+                    else if (personajes[i+4*j].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
                         try{
                             personajes[i].actuar(personajes[i+4*j]);
                             ataco = true;}
@@ -406,7 +422,12 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("D")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i + 4*j - abs(j)].team == "O"){
+                    long unsigned int ubicacion = i + 4*j - abs(j);
+                    int ubi = i + 4*j - abs(j);
+                    if (ubi < 0 || ubicacion > personajes.size()){
+
+                    }
+                    else if (personajes[ubicacion].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
                         try{
                             personajes[i].actuar(personajes[i + 4*j - abs(j)]);
                             ataco = true;}

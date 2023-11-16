@@ -67,4 +67,13 @@ void Personaje::stats_personajes(string code, int x, int y, string t) {
 void Personaje::actuar(Personaje& target){
     int damage = rand() % (fuerza_max - fuerza_max / 2 + 1) + fuerza_max / 2;
     target.salud_base -= damage;
+    if (target.salud_base <= 0){
+        target.codigo = " ";
+        target.salud_base = 0;
+        target.fuerza_max = 0;
+        target.alcance_max = 0;
+        target.direccion_ataque = "";
+        target.desplazamiento = 0;
+        target.curacion = 0;       
+    }
 }

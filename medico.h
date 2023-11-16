@@ -5,7 +5,7 @@
 
 class Medico : public Personaje {
 public:
-    Medico(string code, int x, int y);
+    Medico(string code, int x, int y, string team);
 };
 
 #endif

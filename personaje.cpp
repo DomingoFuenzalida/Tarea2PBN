@@ -1,10 +1,11 @@
 #include "personaje.h"
 using namespace std;
 
-void Personaje::stats_personajes(string code, int x, int y) {
+void Personaje::stats_personajes(string code, int x, int y, string team) {
     codigo = code;
     posx = x;
     posy = y;
+    team = team;
     if (codigo.compare("S") == 0) {
         nombre = "soldado";
         salud_base = 50;
@@ -63,3 +64,6 @@ void Personaje::stats_personajes(string code, int x, int y) {
         curacion = 0;
     }
 } 
+//void atacar(int fuerza_max, int pos_x, int pos_y){
+//
+//}

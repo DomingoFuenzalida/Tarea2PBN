@@ -5,7 +5,7 @@
 
 class Ingeniero : public Personaje {
 public:
-    Ingeniero(string code, int x, int y);
+    Ingeniero(string code, int x, int y, string team);
 };
 
 #endif

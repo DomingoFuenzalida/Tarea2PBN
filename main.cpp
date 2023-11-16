@@ -25,14 +25,29 @@ int main() {
             
                 Personaje nuevo_personaje;
                 if (mapa[i][j][0] == 'I') {
-                    Ingeniero ingeniero(mapa[i][j], i, j);
-                    personajes.push_back(ingeniero);
+                    if (j < 2){
+                    Ingeniero ingeniero(mapa[i][j], i, j, "O");
+                    personajes.push_back(ingeniero);}
+                    else {
+                    Ingeniero ingeniero(mapa[i][j], i, j, "E");
+                    personajes.push_back(ingeniero);                        
+                    }
                 } else if (mapa[i][j][0] == 'M') {
-                    Medico medico(mapa[i][j], i, j);
-                    personajes.push_back(medico);
+                    if (j < 2){
+                    Medico medico(mapa[i][j], i, j, "O");
+                    personajes.push_back(medico);}
+                    else{
+                    Medico medico(mapa[i][j], i, j, "E");
+                    personajes.push_back(medico);                        
+                    }
                 } else {
-                    nuevo_personaje.stats_personajes(mapa[i][j], i, j);
-                    personajes.push_back(nuevo_personaje);
+                    if (j < 2){
+                    nuevo_personaje.stats_personajes(mapa[i][j], i, j, "O");
+                    personajes.push_back(nuevo_personaje);}
+                    else{
+                    nuevo_personaje.stats_personajes(mapa[i][j], i, j, "E");
+                    personajes.push_back(nuevo_personaje);                        
+                    }
                 }
             
         }
@@ -286,7 +301,7 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
         cout << "\t";
     }
     cout << endl;}
-    cout << "----------------------"<<endl;
+    cout << "-------------------------------"<<endl;
 }
 
 void liberar_memoria(char***& mapa, int filas) {

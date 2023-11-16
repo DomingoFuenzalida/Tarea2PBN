@@ -17,8 +17,8 @@ public:
     int curacion;
     int posx;
     int posy;
-
-    void stats_personajes(string, int, int);
+    string team;
+    void stats_personajes(string, int, int, string);
 };
 
 #endif

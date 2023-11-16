@@ -19,6 +19,7 @@ public:
     int posy;
     string team;
     void stats_personajes(string, int, int, string);
+    void actuar(Personaje& target);
 };
 
 #endif

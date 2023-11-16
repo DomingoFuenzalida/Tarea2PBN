@@ -1,11 +1,11 @@
 #include "personaje.h"
 using namespace std;
 
-void Personaje::stats_personajes(string code, int x, int y, string team) {
+void Personaje::stats_personajes(string code, int x, int y, string t) {
     codigo = code;
     posx = x;
     posy = y;
-    team = team;
+    team = t;
     if (codigo.compare("S") == 0) {
         nombre = "soldado";
         salud_base = 50;
@@ -64,6 +64,7 @@ void Personaje::stats_personajes(string code, int x, int y, string team) {
         curacion = 0;
     }
 } 
-//void atacar(int fuerza_max, int pos_x, int pos_y){
-//
-//}
+void Personaje::actuar(Personaje& target){
+    int damage = rand() % (fuerza_max - fuerza_max / 2 + 1) + fuerza_max / 2;
+    target.salud_base -= damage;
+}

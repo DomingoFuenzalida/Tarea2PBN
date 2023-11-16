@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <chrono>
+#include <thread>
 #include "ingeniero.h"
 #include "medico.h"
 #include "personaje.h"
@@ -10,7 +12,7 @@ void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
 void imprimir_mapa(const vector<Personaje>& personajes, int filas);
 void liberar_memoria(char***& mapa, int filas);
-
+void atacar(const vector<Personaje>& personajes);
 int main() {
     int cantidad_filas;
     cout << "Ingrese la cantidad de filas (15 ~ 40): ";
@@ -26,26 +28,26 @@ int main() {
                 Personaje nuevo_personaje;
                 if (mapa[i][j][0] == 'I') {
                     if (j < 2){
-                    Ingeniero ingeniero(mapa[i][j], i, j, "O");
+                    Ingeniero ingeniero(mapa[i][j], j, i, "O");
                     personajes.push_back(ingeniero);}
                     else {
-                    Ingeniero ingeniero(mapa[i][j], i, j, "E");
+                    Ingeniero ingeniero(mapa[i][j], j, i, "E");
                     personajes.push_back(ingeniero);                        
                     }
                 } else if (mapa[i][j][0] == 'M') {
                     if (j < 2){
-                    Medico medico(mapa[i][j], i, j, "O");
+                    Medico medico(mapa[i][j], j, i, "O");
                     personajes.push_back(medico);}
                     else{
-                    Medico medico(mapa[i][j], i, j, "E");
+                    Medico medico(mapa[i][j], j, i, "E");
                     personajes.push_back(medico);                        
                     }
                 } else {
                     if (j < 2){
-                    nuevo_personaje.stats_personajes(mapa[i][j], i, j, "O");
+                    nuevo_personaje.stats_personajes(mapa[i][j], j, i, "O");
                     personajes.push_back(nuevo_personaje);}
                     else{
-                    nuevo_personaje.stats_personajes(mapa[i][j], i, j, "E");
+                    nuevo_personaje.stats_personajes(mapa[i][j], j, i, "E");
                     personajes.push_back(nuevo_personaje);                        
                     }
                 }
@@ -56,7 +58,15 @@ int main() {
     
     // Imprimir el mapa
     imprimir_mapa(personajes, cantidad_filas);
-
+    this_thread::sleep_for(chrono::milliseconds(1000));
+    atacar(personajes);
+    this_thread::sleep_for(chrono::milliseconds(1000));
+    imprimir_mapa(personajes, cantidad_filas);
+    this_thread::sleep_for(chrono::milliseconds(1000));
+    atacar(personajes);
+    this_thread::sleep_for(chrono::milliseconds(1000));
+    imprimir_mapa(personajes, cantidad_filas);
+    this_thread::sleep_for(chrono::milliseconds(1000));
     liberar_memoria(mapa, cantidad_filas);
     return 0;
 }
@@ -303,6 +313,61 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
     cout << endl;}
     cout << "-------------------------------"<<endl;
 }
+
+void atacar(const vector<Personaje>& personajes){
+    for (long unsigned int i= 0 ; i < personajes.size(); i++){
+        string direccion = personajes[i].direccion_ataque;
+        int alcance = personajes[i].alcance_max;
+        //int pos_x = personajes[i].posx;
+        //int pos_y = personajes[i].posy;
+        bool ataco = false;
+
+        string team_atacante = personajes[i].team;
+        if (team_atacante == "O" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
+            if (direccion.find("H")!= string::npos){
+                for (int j = 0; j <= alcance; j++){
+                    if (personajes[i+j].team != team_atacante){
+                        personajes[i].actuar(personajes[i+j]);
+                        ataco = true;
+                        cout << personajes[i+j].codigo <<endl;
+                    }
+                }
+            } 
+            if (direccion.find("V")!= string::npos && ataco == false){
+                for (int j = -alcance; j <= alcance; j++){
+                    if (personajes[i+4*j].team != team_atacante){
+                        try{
+                            personajes[i].actuar(personajes[i+4*j]);
+                            ataco = true;}
+                        catch(int a){
+                            
+                        }
+                    }
+                    
+                }
+            } 
+            if (direccion.find("D")!= string::npos && ataco == false){
+                for (int j = -alcance; j <= alcance; j++){
+                    if (personajes[i + 4*j + abs(j)].team != team_atacante){
+                        try{
+                            personajes[i].actuar(personajes[i+4*j]);
+                            ataco = true;}
+                        catch(int a){
+                            
+                        }
+                    }
+                    
+                }
+            } 
+        }
+        else{
+
+        }
+
+    }
+
+}
+
 
 void liberar_memoria(char***& mapa, int filas) {
     for (int i = 0; i < filas; i++) {

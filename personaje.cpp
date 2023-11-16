@@ -54,7 +54,7 @@ void Personaje::stats_personajes(string code, int x, int y) {
         desplazamiento = 1;
         curacion = 0;
     } else {
-        nombre = '';
+        nombre = ' ';
         salud_base = 0;
         fuerza_max = 0;
         alcance_max = 0;

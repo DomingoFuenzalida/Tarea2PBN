@@ -4,6 +4,7 @@
 #include "personaje.h"
 
 class Ingeniero : public Personaje {
+public:
     Ingeniero(string code, int x, int y);
 };
 

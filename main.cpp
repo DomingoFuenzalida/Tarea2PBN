@@ -8,7 +8,7 @@
 using namespace std;
 void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
-void imprimir_mapa(const vector<Personaje>& personajes, int filas, char*** mapa);
+void imprimir_mapa(const vector<Personaje>& personajes, int filas);
 void liberar_memoria(char***& mapa, int filas);
 
 int main() {
@@ -40,7 +40,7 @@ int main() {
     
     
     // Imprimir el mapa
-    imprimir_mapa(personajes, cantidad_filas, mapa);
+    imprimir_mapa(personajes, cantidad_filas);
 
     liberar_memoria(mapa, cantidad_filas);
     return 0;
@@ -262,7 +262,7 @@ for (int i = 0; i < contador_no_medicos_bando2/5; i++){
 
 }
 
-void imprimir_mapa(const vector<Personaje>& personajes, int filas, char*** mapa) {
+void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
     cout << "\toeste\teste" << endl;
     for (int i = 0; i < filas*4; i+=4) {
     if (personajes[i].codigo != " "){
@@ -298,6 +298,5 @@ void liberar_memoria(char***& mapa, int filas) {
     }
     free(mapa);
 }
-
 
 

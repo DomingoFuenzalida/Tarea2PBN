@@ -337,7 +337,7 @@ void atacar(vector<Personaje>& personajes){
         if (team_atacante == "O" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
             if (direccion.find("H")!= string::npos){
                 for (int j = 0; j <= alcance; j++){
-                    if (personajes[i+j].team != team_atacante){
+                    if (personajes[i+j].team == "E" && ataco == false){
                         personajes[i].actuar(personajes[i+j]);
                         ataco = true;
                         
@@ -346,7 +346,7 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("V")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i+4*j].team != team_atacante){
+                    if (personajes[i+4*j].team == "E"){
                         try{
                             personajes[i].actuar(personajes[i+4*j]);
                             ataco = true;}
@@ -359,7 +359,8 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("D")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i + 4*j + abs(j)].team != team_atacante){
+                    if (personajes[i + 4*j + abs(j)].team == "E"){
+                        cout<<"llegue"<<endl;
                         try{
                             personajes[i].actuar(personajes[i+4*j+abs(j)]);
                             ataco = true;}
@@ -383,7 +384,7 @@ void atacar(vector<Personaje>& personajes){
         if (team_atacante == "E" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
             if (direccion.find("H")!= string::npos){
                 for (int j = 0; j <= alcance; j++){
-                    if (personajes[i-j].team != team_atacante){
+                    if (personajes[i-j].team == "O" && ataco == false){
                         personajes[i].actuar(personajes[i-j]);
                         ataco = true;
                         
@@ -392,7 +393,7 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("V")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i+4*j].team != team_atacante){
+                    if (personajes[i+4*j].team == "O"){
                         try{
                             personajes[i].actuar(personajes[i+4*j]);
                             ataco = true;}
@@ -405,9 +406,9 @@ void atacar(vector<Personaje>& personajes){
             } 
             if (direccion.find("D")!= string::npos && ataco == false){
                 for (int j = -alcance; j <= alcance; j++){
-                    if (personajes[i - 4*j - abs(j)].team != team_atacante){
+                    if (personajes[i + 4*j - abs(j)].team == "O"){
                         try{
-                            personajes[i].actuar(personajes[i - 4*j - abs(j)]);
+                            personajes[i].actuar(personajes[i + 4*j - abs(j)]);
                             ataco = true;}
                         catch(int a){
                             

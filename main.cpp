@@ -2,9 +2,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-
+#include "ingeniero.h"
+#include "medico.h"
+#include "personaje.h"
 using namespace std;
-
+void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
 void imprimir_mapa(char*** mapa, int filas);
 void liberar_memoria(char***& mapa, int filas);
@@ -16,7 +18,26 @@ int main() {
 
     char*** mapa;
     gen_personajes(mapa, cantidad_filas);
-
+    
+    vector<Personaje> personajes;
+    for (int i = 0; i < cantidad_filas; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            if (mapa[i][j][0] != ' ') {
+                Personaje nuevo_personaje;
+                if (mapa[i][j][0] == 'I') {
+                    Ingeniero ingeniero(mapa[i][j], i, j);
+                    personajes.push_back(ingeniero);
+                } else if (mapa[i][j][0] == 'M') {
+                    Medico medico(mapa[i][j], i, j);
+                    personajes.push_back(medico);
+                } else {
+                    nuevo_personaje.stats_personajes(mapa[i][j], i, j);
+                    personajes.push_back(nuevo_personaje);
+                }
+            }
+        }
+    }
+    
     // Imprimir el mapa
     imprimir_mapa(mapa, cantidad_filas);
 
@@ -165,6 +186,7 @@ for (int i = 0; i < filas; ++i) {
 
             if (probabilidad <= 30) {
                 mapa[i][1][0] = 'S';  // Soldado con probabilidad del 30%
+                
             } else if (probabilidad <= 45) {
                 mapa[i][1][0] = 'A';  // Arquero con probabilidad del 15%
             } else if (probabilidad <= 65) {
@@ -238,7 +260,6 @@ for (int i = 0; i < contador_no_medicos_bando2/5; i++){
 }
 
 }
-
 
 void imprimir_mapa(char*** mapa, int filas) {
     for (int i = 0; i < filas; i++) {

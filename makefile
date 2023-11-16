@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -Wextra -Wundef -Werror -Wuninitialized -Winit-self
 
-SRCS = main.cpp personaje.cpp
+SRCS = main.cpp personaje.cpp medico.cpp ingeniero.cpp
 OBJS = $(SRCS:.cpp=.o)
 TARGET = main
 $(TARGET): $(OBJS)

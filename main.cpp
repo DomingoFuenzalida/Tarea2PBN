@@ -8,7 +8,7 @@
 using namespace std;
 void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
-void imprimir_mapa(char*** mapa, int filas);
+void imprimir_mapa(const vector<Personaje>& personajes, int filas, char*** mapa);
 void liberar_memoria(char***& mapa, int filas);
 
 int main() {
@@ -22,7 +22,7 @@ int main() {
     vector<Personaje> personajes;
     for (int i = 0; i < cantidad_filas; ++i) {
         for (int j = 0; j < 4; ++j) {
-            if (mapa[i][j][0] != ' ') {
+            
                 Personaje nuevo_personaje;
                 if (mapa[i][j][0] == 'I') {
                     Ingeniero ingeniero(mapa[i][j], i, j);
@@ -34,12 +34,13 @@ int main() {
                     nuevo_personaje.stats_personajes(mapa[i][j], i, j);
                     personajes.push_back(nuevo_personaje);
                 }
-            }
+            
         }
     }
     
+    
     // Imprimir el mapa
-    imprimir_mapa(mapa, cantidad_filas);
+    imprimir_mapa(personajes, cantidad_filas, mapa);
 
     liberar_memoria(mapa, cantidad_filas);
     return 0;
@@ -261,13 +262,37 @@ for (int i = 0; i < contador_no_medicos_bando2/5; i++){
 
 }
 
-void imprimir_mapa(char*** mapa, int filas) {
-    for (int i = 0; i < filas; i++) {
-        for (int j = 0; j < 4; j++) {
-            cout << mapa[i][j][0] << " ";
-        }
-        cout << endl;
+void imprimir_mapa(const vector<Personaje>& personajes, int filas, char*** mapa) {
+    cout << "\toeste\teste" << endl;
+    for (int i = 0; i < filas*4; i+=4) {
+    if (personajes[i].codigo != " "){
+    cout << personajes[i].codigo << " " << personajes[i].salud_base << "\t";}
+    else {
+        cout << "\t";
     }
+    if (personajes[i+1].codigo != " "){
+    cout << personajes[i + 1].codigo << " " << personajes[i + 1].salud_base << "\t";}
+    else {
+        cout << "\t";
+    }
+    if (personajes[i+2].codigo != " "){
+    cout << personajes[i + 2].codigo << " " << personajes[i + 2].salud_base << "\t";}
+    else {
+        cout << "\t";
+    }
+    if (personajes[i+3].codigo != " "){
+    cout << personajes[i + 3].codigo << " " << personajes[i + 3].salud_base << "\t";}
+    else {
+        cout << "\t";
+    }
+    cout << endl;}
+    cout << "----------------------"<<endl;
+    for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < 4; j++) {
+                cout << mapa[i][j][0] << " ";
+            }
+            cout << endl;
+        }
 }
 
 void liberar_memoria(char***& mapa, int filas) {

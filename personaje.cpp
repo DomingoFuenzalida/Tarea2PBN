@@ -90,12 +90,12 @@ void Personaje::actuar(Personaje& target){
         int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
         target.salud += cu;
     if (target.salud > target.salud_base){
-        target.salud = salud_base;
+        target.salud = target.salud_base;
     }}
     if (target.codigo == "T" and target.team == team && codigo == "I"){
     int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;
     target.salud += cu;
     if (target.salud > target.salud_base){
-        target.salud = salud_base;
+        target.salud = target.salud_base;
     }}
 }

@@ -12,7 +12,7 @@ void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
 void imprimir_mapa(const vector<Personaje>& personajes, int filas);
 void liberar_memoria(char***& mapa, int filas);
-void atacar(const vector<Personaje>& personajes);
+void atacar(vector<Personaje>& personajes);
 int main() {
     int cantidad_filas;
     cout << "Ingrese la cantidad de filas (15 ~ 40): ";
@@ -314,7 +314,7 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
     cout << "-------------------------------"<<endl;
 }
 
-void atacar(const vector<Personaje>& personajes){
+void atacar(vector<Personaje>& personajes){
     for (long unsigned int i= 0 ; i < personajes.size(); i++){
         string direccion = personajes[i].direccion_ataque;
         int alcance = personajes[i].alcance_max;

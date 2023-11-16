@@ -74,6 +74,7 @@ void Personaje::actuar(Personaje& target){
         target.alcance_max = 0;
         target.direccion_ataque = "";
         target.desplazamiento = 0;
-        target.curacion = 0;       
+        target.curacion = 0;
+        target.team = " ";       
     }
 }

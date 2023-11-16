@@ -12,7 +12,8 @@ void crear_personajes(char***& mapa, int filas);
 void gen_personajes(char***& mapa, int filas);
 void imprimir_mapa(const vector<Personaje>& personajes, int filas);
 void liberar_memoria(char***& mapa, int filas);
-void atacar(vector<Personaje>& personajes);
+void actuar(vector<Personaje>& personajes);
+bool is_in_range(int attackerPos, int targetPos, int range);
 int main() {
     int cantidad_filas;
     cout << "Ingrese la cantidad de filas (15 ~ 40): ";
@@ -55,28 +56,29 @@ int main() {
         }
     }
     
-    int co;
-    int ce;
+    int co = 0;
+    int ce = 0;
     bool continuar = true;
-    // Imprimir el mapa
     do{
+
     imprimir_mapa(personajes, cantidad_filas);
     this_thread::sleep_for(chrono::milliseconds(1000));
-    atacar(personajes);
-
+    actuar(personajes);
+    co = 0;
+    ce = 0;
     for (long unsigned int i=0; i < personajes.size(); i++){
-        if (personajes[i].codigo != " "){
+        
             if (personajes[i].team == "E"){
                 ce++;
             }
-            else{
+            else if (personajes[i].team == "O"){
                 co++;
             }}
+    
     if (ce == 0 || co == 0){
-        continuar = false;
-    } }}
+        continuar = false;}}
     while(continuar == true);
-
+    imprimir_mapa(personajes, cantidad_filas);
 
     liberar_memoria(mapa, cantidad_filas);
     return 0;
@@ -324,124 +326,30 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
     cout << endl;}
     cout << "-------------------------------"<<endl;
 }
-
-void atacar(vector<Personaje>& personajes){
-    for (long unsigned int i= 0 ; i < personajes.size(); i++){
-        string direccion = personajes[i].direccion_ataque;
-        int alcance = personajes[i].alcance_max;
-        //int pos_x = personajes[i].posx;
-        //int pos_y = personajes[i].posy;
-        bool ataco = false;
-
-        string team_atacante = personajes[i].team;
-        if (team_atacante == "O" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
-            if (direccion.find("H")!= string::npos){
-                for (int j = 0; j <= alcance; j++){
-                    if (personajes[i+j].team != team_atacante && personajes[i+j].codigo != " " && ataco == false){
-                        personajes[i].actuar(personajes[i+j]);
-                        ataco = true;
-                        
-                    }
-                }
-            } 
-            if (direccion.find("V")!= string::npos && ataco == false){
-                for (int j = -alcance; j <= alcance; j++){
-                    long unsigned int ubicacion = i+4*j;
-                    int ubi = i+4*j;
-                    if (ubi < 0 || ubicacion > personajes.size()){
-
-                    }
-                    else if (personajes[i+4*j].team != team_atacante && personajes[i+4*j].codigo != " " ){
-                        try{
-                            personajes[i].actuar(personajes[i+4*j]);
-                            ataco = true;}
-                        catch(int a){
-                            
-                        }
-                    }
-                    
-                }
-            } 
-            if (direccion.find("D")!= string::npos && ataco == false){
-                for (int j = -alcance; j <= alcance; j++){
-                    long unsigned int ubicacion = i + 4*j + abs(j);
-                    int ubi = i + 4*j + abs(j);
-                    if (ubi < 0 || ubicacion > personajes.size()){
-
-                    }
-                    
-                    else if (personajes[ubicacion].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
-                        cout<<"llegue"<<endl;
-                        try{
-                            personajes[i].actuar(personajes[i+4*j+abs(j)]);
-                            ataco = true;}
-                        catch(int a){
-                            
-                        }
-                    }
-                    
-                }
-            } 
-        }
-    }
-    for (long unsigned int i= 0 ; i < personajes.size(); i++){
-        string direccion = personajes[i].direccion_ataque;
-        int alcance = personajes[i].alcance_max;
-        //int pos_x = personajes[i].posx;
-        //int pos_y = personajes[i].posy;
-        bool ataco = false;
-
-        string team_atacante = personajes[i].team;
-        if (team_atacante == "E" && personajes[i].codigo != "I" && personajes[i].codigo != "M"){
-            if (direccion.find("H")!= string::npos){
-                for (int j = 0; j <= alcance; j++){
-                    if (personajes[i-j].team != team_atacante && personajes[i+j].codigo != " "  && ataco == false){
-                        personajes[i].actuar(personajes[i-j]);
-                        ataco = true;
-                        
-                    }
-                }
-            } 
-            if (direccion.find("V")!= string::npos && ataco == false){
-                for (int j = -alcance; j <= alcance; j++){
-                    long unsigned int ubicacion = i+4*j;
-                    int ubi = i+4*j;
-                    if (ubi < 0 || ubicacion > personajes.size()){
-
-                    }
-                    else if (personajes[i+4*j].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
-                        try{
-                            personajes[i].actuar(personajes[i+4*j]);
-                            ataco = true;}
-                        catch(int a){
-                            
-                        }
-                    }
-                    
-                }
-            } 
-            if (direccion.find("D")!= string::npos && ataco == false){
-                for (int j = -alcance; j <= alcance; j++){
-                    long unsigned int ubicacion = i + 4*j - abs(j);
-                    int ubi = i + 4*j - abs(j);
-                    if (ubi < 0 || ubicacion > personajes.size()){
-
-                    }
-                    else if (personajes[ubicacion].team != team_atacante && personajes[ubicacion].codigo != " "  && ataco == false){
-                        try{
-                            personajes[i].actuar(personajes[i + 4*j - abs(j)]);
-                            ataco = true;}
-                        catch(int a){
-                            
-                        }
-                    }
-                    
-                }
-            } 
-        }
-    }
+bool is_in_range(int attackerPos, int targetPos, int range) {
+    return abs(attackerPos - targetPos) <= range;
 }
-
+void actuar(vector<Personaje>& personajes) {
+    for (vector<Personaje>::size_type i = 0; i < personajes.size(); ++i) {
+                    if ((typeid(Medico) != typeid(personajes[i]) && typeid(Ingeniero) != typeid(personajes[i]))) {
+                    for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                        if (((personajes[j].posx == 2 || personajes[j].posx == 3) && personajes[j].team != " ") &&
+                            is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                            personajes[i].actuar(personajes[j]);
+                        }
+                    }
+                }
+    
+            if (personajes[i].posx == 2 || personajes[i].posx == 3) {
+                if ((typeid(Medico) != typeid(personajes[i]) && typeid(Ingeniero) != typeid(personajes[i]))) {
+                    for (std::vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                        if (((personajes[j].posx == 1 || personajes[j].posx == 0 )&& personajes[j].team != " ") &&
+                            is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                            personajes[i].actuar(personajes[j]);
+                        }
+                    }
+                }
+}}}
 
 void liberar_memoria(char***& mapa, int filas) {
     for (int i = 0; i < filas; i++) {

@@ -18,6 +18,7 @@ public:
     int posx;
     int posy;
     string team;
+    int salud;
     void stats_personajes(string, int, int, string);
     void actuar(Personaje& target);
 };

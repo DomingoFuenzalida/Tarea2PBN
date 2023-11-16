@@ -10,4 +10,5 @@ Ingeniero::Ingeniero(string code, int x, int y, string team) {
     desplazamiento = 3;
     curacion = 20;
     team = team;
+    salud = 30;
 }

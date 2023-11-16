@@ -55,7 +55,7 @@ int main() {
             
         }
     }
-    
+    cout << "hola"<<endl;
     int co = 0;
     int ce = 0;
     bool continuar = true;
@@ -304,22 +304,22 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas) {
     cout << "\toeste\teste" << endl;
     for (int i = 0; i < filas*4; i+=4) {
     if (personajes[i].codigo != " "){
-    cout << personajes[i].codigo << " " << personajes[i].salud_base << "\t";}
+    cout << personajes[i].codigo << " " << personajes[i].salud << "\t";}
     else {
         cout << "\t";
     }
     if (personajes[i+1].codigo != " "){
-    cout << personajes[i + 1].codigo << " " << personajes[i + 1].salud_base << "\t";}
+    cout << personajes[i + 1].codigo << " " << personajes[i + 1].salud << "\t";}
     else {
         cout << "\t";
     }
     if (personajes[i+2].codigo != " "){
-    cout << personajes[i + 2].codigo << " " << personajes[i + 2].salud_base << "\t";}
+    cout << personajes[i + 2].codigo << " " << personajes[i + 2].salud << "\t";}
     else {
         cout << "\t";
     }
     if (personajes[i+3].codigo != " "){
-    cout << personajes[i + 3].codigo << " " << personajes[i + 3].salud_base << "\t";}
+    cout << personajes[i + 3].codigo << " " << personajes[i + 3].salud << "\t";}
     else {
         cout << "\t";
     }
@@ -331,7 +331,7 @@ bool is_in_range(int attackerPos, int targetPos, int range) {
 }
 void actuar(vector<Personaje>& personajes) {
     for (vector<Personaje>::size_type i = 0; i < personajes.size(); ++i) {
-                    if ((typeid(Medico) != typeid(personajes[i]) && typeid(Ingeniero) != typeid(personajes[i]))) {
+            {
                     for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
                         if (((personajes[j].posx == 2 || personajes[j].posx == 3) && personajes[j].team != " ") &&
                             is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
@@ -339,9 +339,9 @@ void actuar(vector<Personaje>& personajes) {
                         }
                     }
                 }
-    
+         
             if (personajes[i].posx == 2 || personajes[i].posx == 3) {
-                if ((typeid(Medico) != typeid(personajes[i]) && typeid(Ingeniero) != typeid(personajes[i]))) {
+                {
                     for (std::vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
                         if (((personajes[j].posx == 1 || personajes[j].posx == 0 )&& personajes[j].team != " ") &&
                             is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
@@ -349,6 +349,7 @@ void actuar(vector<Personaje>& personajes) {
                         }
                     }
                 }
+
 }}}
 
 void liberar_memoria(char***& mapa, int filas) {

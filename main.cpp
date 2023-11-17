@@ -14,6 +14,8 @@ void imprimir_mapa(const vector<Personaje>& personajes, int filas);
 void liberar_memoria(char***& mapa, int filas);
 void actuar(vector<Personaje>& personajes);
 bool is_in_range(int attackerPos, int targetPos, int range);
+void moverse(vector<Personaje>& personajes);
+
 int main() {
     int cantidad_filas;
     cout << "Ingrese la cantidad de filas (15 ~ 40): ";
@@ -55,17 +57,18 @@ int main() {
             
         }
     }
-    
+
     int co = 0;
     int ce = 0;
     bool continuar = true;
     imprimir_mapa(personajes, cantidad_filas);
     this_thread::sleep_for(chrono::milliseconds(1000));
     do{
+    
     actuar(personajes);
     this_thread::sleep_for(chrono::milliseconds(1000));
     imprimir_mapa(personajes, cantidad_filas);
-    actuar(personajes);
+
     co = 0;
     ce = 0;
     for (long unsigned int i=0; i < personajes.size(); i++){
@@ -341,7 +344,7 @@ void actuar(vector<Personaje>& personajes) {
          
             if (personajes[i].posx == 2 || personajes[i].posx == 3) {
                 {
-                    for (std::vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                    for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
                         if (((personajes[j].posx == 1 || personajes[j].posx == 0 )&& personajes[j].team != " ") &&
                             is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
                             personajes[i].actuar(personajes[j]);
@@ -349,7 +352,31 @@ void actuar(vector<Personaje>& personajes) {
                     }
                 }
 
-}}}
+    }}
+    this_thread::sleep_for(chrono::milliseconds(50));
+    moverse(personajes);}
+void moverse(vector<Personaje>& personajes){
+    for (vector<Personaje>::size_type i = 0; i < personajes.size(); ++i){
+        int max = personajes[i].desplazamiento;
+        int mov = rand()%(max+1);
+        int dir = rand()%2;
+        if (dir == 1){
+            mov = -mov;
+        }
+
+        long unsigned int target = i+ mov*4;
+        int target2 = i+ mov*4;
+        
+        if (target <= 0 || target > personajes.size() || personajes[target2].codigo != " "){
+            continue;
+        }
+        else{
+            personajes[i].desplazarse(target2, personajes, i);
+        }
+    }
+
+}
+
 
 void liberar_memoria(char***& mapa, int filas) {
     for (int i = 0; i < filas; i++) {

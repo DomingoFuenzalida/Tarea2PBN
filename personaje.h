@@ -2,6 +2,7 @@
 #define PERSONAJE_H
 
 #include <iostream>
+#include <vector>
 #include <string>
 using namespace std;
 
@@ -21,6 +22,7 @@ public:
     int salud;
     void stats_personajes(string, int, int, string);
     virtual void actuar(Personaje& target);
+    void desplazarse(int target, vector<Personaje>& personajes, int origen);
 };
 
 #endif

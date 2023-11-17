@@ -1,4 +1,5 @@
 #include "personaje.h"
+#include <vector>
 using namespace std;
 
 void Personaje::stats_personajes(string code, int x, int y, string t) {
@@ -99,6 +100,6 @@ void Personaje::actuar(Personaje& target){
         target.salud = target.salud_base;
     }}
 }
-//void Personaje::desplazamiento(Personaje& target){
-//    
-//}
+void Personaje::desplazarse(int target, vector<Personaje>& personajes, int origen){
+    swap(personajes[origen], personajes[target]);
+}

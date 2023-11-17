@@ -43,7 +43,9 @@
         "ostream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "chrono": "cpp",
+        "semaphore": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

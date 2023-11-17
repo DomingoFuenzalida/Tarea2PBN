@@ -20,7 +20,7 @@ void Medico::actuar(Personaje& target){
         if (salud > salud_base){
         salud = salud_base;
     }}
-    else if (target.codigo != "T" and target.team == team && codigo == "M"){
+    else if (target.codigo != "T" && target.team == team && codigo == "M"){
         
         int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
         target.salud += cu;

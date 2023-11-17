@@ -87,18 +87,18 @@ void Personaje::actuar(Personaje& target){
         target.team = " ";
         target.salud = 0;       
     }}
-    if (target.codigo != "T" and target.team == team && codigo == "M"){
-        int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
-        target.salud += cu;
-    if (target.salud > target.salud_base){
-        target.salud = target.salud_base;
-    }}
-    if (target.codigo == "T" and target.team == team && codigo == "I"){
-    int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;
-    target.salud += cu;
-    if (target.salud > target.salud_base){
-        target.salud = target.salud_base;
-    }}
+//    if (target.codigo != "T" && target.team == team && codigo == "M"){
+//        int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
+//        target.salud += cu;
+//    if (target.salud > target.salud_base){
+//        target.salud = target.salud_base;
+//    }}
+//    if (target.codigo == "T" && target.team == team && codigo == "I"){
+//    int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;
+//    target.salud += cu;
+//    if (target.salud > target.salud_base){
+//        target.salud = target.salud_base;
+//    }}
 }
 void Personaje::desplazarse(int target, vector<Personaje>& personajes, int origen){
     swap(personajes[origen], personajes[target]);

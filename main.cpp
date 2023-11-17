@@ -333,7 +333,8 @@ bool is_in_range(int attackerPos, int targetPos, int range) {
 }
 void actuar(vector<Personaje>& personajes) {
     for (vector<Personaje>::size_type i = 0; i < personajes.size(); ++i) {
-            {
+            
+                if (typeid(Medico) != typeid(personajes[i]) && (typeid(Ingeniero)!= typeid(personajes[i]))){
                     for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
                         if (((personajes[j].posx == 2 || personajes[j].posx == 3) && personajes[j].team != " ") &&
                             is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
@@ -341,9 +342,28 @@ void actuar(vector<Personaje>& personajes) {
                         }
                     }
                 }
+                else if (typeid(Medico)== typeid(personajes[i])){
+                    Medico& medico = dynamic_cast<Medico&>(personajes[i]);
+                    for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                        if (((personajes[j].posx == 0 || personajes[j].posx == 1) && personajes[j].team != " ") &&
+                            is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                            medico.actuar(personajes[j]);
+                        }
+                    }
+                }
+                else if (typeid(Ingeniero)== typeid(personajes[i])){
+                    Ingeniero& ingeniero = dynamic_cast<Ingeniero&>(personajes[i]);
+                    for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                        if (((personajes[j].posx == 0 || personajes[j].posx == 1) && personajes[j].team != " ") &&
+                            is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                            ingeniero.actuar(personajes[j]);
+                        }
+                    }
+                }
          
             if (personajes[i].posx == 2 || personajes[i].posx == 3) {
-                {
+                
+                if (typeid(Medico) != typeid(personajes[i]) && (typeid(Ingeniero)!= typeid(personajes[i]))){
                     for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
                         if (((personajes[j].posx == 1 || personajes[j].posx == 0 )&& personajes[j].team != " ") &&
                             is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
@@ -351,6 +371,25 @@ void actuar(vector<Personaje>& personajes) {
                         }
                     }
                 }
+                else if (typeid(Medico)== typeid(personajes[i])){
+                    Medico& medico = dynamic_cast<Medico&>(personajes[i]);
+                    for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                        if (((personajes[j].posx == 2 || personajes[j].posx == 3) && personajes[j].team != " ") &&
+                            is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                            medico.actuar(personajes[j]);
+                        }
+                    }
+                }
+                else if (typeid(Ingeniero)== typeid(personajes[i])){
+                Ingeniero& ingeniero = dynamic_cast<Ingeniero&>(personajes[i]);
+                for (vector<Personaje>::size_type j = 0; j < personajes.size(); ++j) {
+                    if (((personajes[j].posx == 2 || personajes[j].posx == 3) && personajes[j].team != " ") &&
+                        is_in_range(personajes[i].posy, personajes[j].posy, personajes[i].alcance_max)) {
+                        ingeniero.actuar(personajes[j]);
+                    }
+                }
+                }
+                
 
     }}
     this_thread::sleep_for(chrono::milliseconds(50));

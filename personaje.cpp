@@ -99,3 +99,6 @@ void Personaje::actuar(Personaje& target){
         target.salud = target.salud_base;
     }}
 }
+//void Personaje::desplazamiento(Personaje& target){
+//    
+//}

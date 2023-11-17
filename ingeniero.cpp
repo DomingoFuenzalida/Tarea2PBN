@@ -12,3 +12,10 @@ Ingeniero::Ingeniero(string code, int x, int y, string team) {
     team = team;
     salud = 30;
 }
+void Ingeniero::actuar(Personaje& target){
+    if (target.codigo != "T" and target.team == team && codigo == "M"){
+        int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
+        target.salud += cu;
+    if (target.salud > target.salud_base){
+        target.salud = target.salud_base;
+    }}}

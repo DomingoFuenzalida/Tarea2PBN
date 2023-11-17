@@ -12,3 +12,18 @@ Medico::Medico(string code, int x, int y, string team) {
     team = team;
     salud = 30;
 }
+void Medico::actuar(Personaje& target){
+    
+    if (salud <= 15){
+        int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2; 
+        salud += cu;
+        if (salud > salud_base){
+        salud = salud_base;
+    }}
+    else if (target.codigo != "T" and target.team == team && codigo == "M"){
+        
+        int cu = rand() % (curacion - curacion / 2 + 1) + curacion / 2;    
+        target.salud += cu;
+    if (target.salud > target.salud_base){
+        target.salud = target.salud_base;
+    }}}

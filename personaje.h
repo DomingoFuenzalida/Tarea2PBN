@@ -20,7 +20,7 @@ public:
     string team;
     int salud;
     void stats_personajes(string, int, int, string);
-    void actuar(Personaje& target);
+    virtual void actuar(Personaje& target);
 };
 
 #endif

@@ -6,6 +6,7 @@
 class Medico : public Personaje {
 public:
     Medico(string code, int x, int y, string team);
+    void actuar(Personaje& target) override;
 };
 
 #endif
